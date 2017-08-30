@@ -1,5 +1,3 @@
-var https = require('https')
-
 exports.handler = (event, context) => {
 
   try {
@@ -16,7 +14,7 @@ exports.handler = (event, context) => {
         console.log(`LAUNCH REQUEST`)
         context.succeed(
           generateResponse(
-            buildSpeechletResponse("Welcome to an Alexa Skill, this is running on a deployed lambda function", true),
+            buildSpeechletResponse("Welcome to an Alexa Skill about Flash Gordon", true),
             {}
           )
         )
@@ -27,7 +25,7 @@ exports.handler = (event, context) => {
         console.log(`INTENT REQUEST`)
 
         switch(event.request.intent.name) {
-          case "GetSubscriberCount":
+          case "GetAction":
             var endpoint = "" // ENDPOINT GOES HERE
             var body = ""
             https.get(endpoint, (response) => {
@@ -37,9 +35,8 @@ exports.handler = (event, context) => {
                 var subscriberCount = data.items[0].statistics.subscriberCount
                 context.succeed(
                   generateResponse(
-                    buildSpeechletResponse(`Current subscriber count is ${subscriberCount}`, true),
+                    buildSpeechletResponse(`What do you mean flash gordon approaching`, true),
                     {}
-                  )
                 )
               })
             })
